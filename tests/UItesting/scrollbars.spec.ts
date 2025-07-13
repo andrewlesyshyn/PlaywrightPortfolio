@@ -43,7 +43,7 @@ test('Scroll into manually', async ({ page }) => {
 
     await page.mouse.wheel(box.x - containerBox.x, box.y - containerBox.y)
     await expect(hidingBtn).toBeInViewport();
-
-    await page.mouse.click(containerBox.x, containerBox.y + box.height / 2);
+    
+    await page.mouse.click(containerBox.x + box.width / 2, containerBox.y + box.height / 2);
     await expect(hidingBtn).toHaveCSS('box-shadow', 'rgba(0, 123, 255, 0.5) 0px 0px 0px 3.2px')
 })
