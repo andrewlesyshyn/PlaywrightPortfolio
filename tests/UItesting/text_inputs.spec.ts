@@ -22,11 +22,23 @@ test('Text input the easy way', async ({ page }) => {
 })
 
 test('Text input manually', async ({ page }) => {
-    // await textinput.fill('NewButtonName');
+    newName = newName + "ButSlow";
     await textinput.click();
-    await page.keyboard.type('NewButSlow', { delay: 100 });
-
+    await page.keyboard.type(newName, { delay: 100 });
+    
     
     await updatingBtn.click();
-    await expect(updatingBtn).toHaveText('NewButSlow')
+    await expect(updatingBtn).toHaveText(newName)
+})
+
+test('Text input, but really manually', async ({ page }) => {
+    newName = newName + " But Silly";
+    await textinput.click();
+
+    for(const char of newName.split('')){
+        await page.keyboard.press(char, {delay: 50})
+    }
+    
+    await updatingBtn.click();
+    await expect(updatingBtn).toHaveText(newName)
 })
