@@ -9,13 +9,13 @@ test.beforeEach(async ({ page }) => {
     await expect(badBtn).toHaveCSS('background-color', 'rgb(0, 123, 255)');
 })
 
-test('Try to emulate', async ({ }) => {
+test('Try to emulate', async () => {
     await badBtn.dispatchEvent('click');
 
     await expect(badBtn).not.toHaveCSS('background-color', 'rgb(33, 136, 56)')
 })
 
-test('Click for real (thanks CDP)', async ({ }) => {
+test('Click for real (thanks CDP)', async () => {
     await badBtn.click();
     // const finalColor = await badBtn.evaluate((el) => {
     //     return getComputedStyle(el).backgroundColor;
@@ -32,7 +32,7 @@ test('Click semi-manually', async ({ page }) => {
 })
 
 test('Click manually', async ({ page }) => {
-    let box = await badBtn.boundingBox();
+    const box = await badBtn.boundingBox();
     if (box === null) throw new Error("Bad button has no bounding box")
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
     await page.mouse.down();

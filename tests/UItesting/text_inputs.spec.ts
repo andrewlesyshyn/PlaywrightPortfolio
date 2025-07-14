@@ -11,11 +11,11 @@ test.beforeEach(async({page}) => {
     updatingBtn = page.getByTestId('updatingButton');
 })
 
-test('Text input the easy way', async ({ page }) => {
+test('Text input the easy way', async () => {
     await textinput.fill(newName);
     await expect(textinput).toHaveValue(newName);
 
-    let buttonText = await updatingBtn.textContent();
+    const buttonText = await updatingBtn.textContent();
     await updatingBtn.click();
     if(buttonText !== null) await expect(updatingBtn).not.toHaveText(buttonText);
     await expect(updatingBtn).toHaveText(newName);
