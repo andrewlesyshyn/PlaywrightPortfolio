@@ -3,7 +3,6 @@ import { test, expect, Locator } from '@playwright/test';
 let overflowedContainer: Locator;
 let hidingBtn: Locator;
 
-// turn and face the strange
 test.beforeEach(async ({ page }) => {
     await page.goto('/scrollbars');
     overflowedContainer = page.locator("//h4[text()='Playground']/following-sibling::div");
