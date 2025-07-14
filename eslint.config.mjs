@@ -15,6 +15,7 @@ export default defineConfig([
       ...playwright.configs['flat/recommended'].rules,
       'playwright/no-conditional-in-test': 'off',
       'playwright/no-conditional-expect': 'off',
+      'playwright/prefer-web-first-assertions': 'off'
     },
   },
   tseslint.configs.recommended,
