@@ -27,7 +27,7 @@ test('Hover and mouse down still working', async ({ page }) => {
 test('Try to move mouse over manually', async ({ page }) => {
     await hidingBtn.scrollIntoViewIfNeeded();
     await expect(hidingBtn).toBeInViewport();
-    let box = await hidingBtn.boundingBox();
+    const box = await hidingBtn.boundingBox();
     if (box === null) throw new Error("Hiding button has no bounding box");
     await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
     await expect(hidingBtn).toHaveCSS('box-shadow', 'rgba(0, 123, 255, 0.5) 0px 0px 0px 3.2px')
@@ -35,10 +35,10 @@ test('Try to move mouse over manually', async ({ page }) => {
 
 test('Scroll into manually', async ({ page }) => {
     await overflowedContainer.click();
-    let containerBox = await overflowedContainer.boundingBox();
+    const containerBox = await overflowedContainer.boundingBox();
     if (containerBox === null) throw new Error("Container has no bounding box");
     
-    let box = await hidingBtn.boundingBox();
+    const box = await hidingBtn.boundingBox();
     if (box === null) throw new Error("Hiding button has no bounding box");
 
     await page.mouse.wheel(box.x - containerBox.x, box.y - containerBox.y)
