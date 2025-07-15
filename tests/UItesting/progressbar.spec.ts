@@ -17,7 +17,6 @@ test("Progressbars can mess with expects, so 'poll'", async () => {
     .poll(
       async () => {
         const valueNow = await progressbar.getAttribute("aria-valuenow");
-        // console.log(`${typeof valueNow}: ${valueNow}`);
         return valueNow;
       },
       {
@@ -27,7 +26,6 @@ test("Progressbars can mess with expects, so 'poll'", async () => {
     )
     .toBe("75");
   await stopBtn.click();
-  // await expect(resultbar).toContainText("Result: 0");
 });
 
 test("Also we can use 'toPass'", async () => {
@@ -35,14 +33,12 @@ test("Also we can use 'toPass'", async () => {
 
   await expect(async () => {
     const valueNow = await progressbar.getAttribute("aria-valuenow");
-    // console.log(`${typeof valueNow}: ${valueNow}`);
     expect(valueNow).toBe("75");
   }).toPass({
     intervals: [50],
     timeout: 60_000,
   });
   await stopBtn.click();
-  // await expect(resultbar).toContainText("Result: 0");
 });
 
 test.afterEach(async () => {
