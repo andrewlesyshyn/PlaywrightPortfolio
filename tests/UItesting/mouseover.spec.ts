@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { timeoutConfig } from '../../playwright.config';
 
 let firstBtn, firstClickCount, secondBtn, secondClickCount;
 
@@ -14,7 +15,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.fail("Try to click first button as usual, and fail", async () => {
-  await firstBtn.click({ timeout: 2_000 });
+  await firstBtn.click({ timeout: timeoutConfig.shortTimeout });
   await expect(firstClickCount).toHaveText("1");
 });
 
@@ -25,7 +26,7 @@ test.fail("Try to click second button as usual, and fail", async ({ page }) => {
   if (secondElement === null)
     throw new Error("Element Handle is not found for 'secondElement'");
 
-  await secondElement.click({ timeout: 2_000 });
+  await secondElement.click({ timeout: timeoutConfig.shortTimeout });
   await expect(secondClickCount).toHaveText("1");
 });
 
@@ -43,7 +44,7 @@ test("Try to mouseover", async ({ page }) => {
 
 test.fail("Also you can try to dispatch event", async () => {
   await firstBtn.hover();
-  await firstBtn.dispatchEvent("click", null, {timeout: 2_000});
+  await firstBtn.dispatchEvent("click", null, {timeout: timeoutConfig.shortTimeout});
   await expect(firstClickCount).toHaveText("1");
 })
 

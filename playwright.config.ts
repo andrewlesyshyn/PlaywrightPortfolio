@@ -8,6 +8,10 @@ import { defineConfig, devices } from "@playwright/test";
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+export const timeoutConfig = {
+  shortTimeout: 2_000
+};
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
@@ -32,6 +36,8 @@ export default defineConfig({
       },
     },
   ],
+
+  
 
   /* Run your local dev server before starting the tests */
   // webServer: {

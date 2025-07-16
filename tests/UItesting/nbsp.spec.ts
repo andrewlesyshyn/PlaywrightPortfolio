@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { timeoutConfig } from "../../playwright.config";
 
 const cssProperty = "box-shadow";
 const cssValue = "rgba(0, 123, 255, 0.5) 0px 0px 0px 3.2px";
@@ -21,7 +22,7 @@ test("Works with different locator", async ({ page }) => {
 
 test.fail("If talking about xPath it gets harder", async ({ page }) => {
   const myButton = page.locator("//button[text()='My Button']");
-  await myButton.click({ timeout: 2_000 });
+  await myButton.click({ timeout: timeoutConfig.shortTimeout });
   await expect(myButton).toHaveCSS(cssProperty, cssValue);
 });
 
