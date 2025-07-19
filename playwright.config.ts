@@ -10,7 +10,8 @@ import { defineConfig, devices } from "@playwright/test";
 
 export const timeoutConfig = {
   shortTimeout: 2_000, 
-  longTimeout: 10_000
+  longTimeout: 10_000,
+  maxTimeout: 45 * 1_000
 };
 
 export default defineConfig({
@@ -19,6 +20,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 3 : undefined,
+  timeout: timeoutConfig.maxTimeout,
   reporter: "html",
   use: {
     trace: "on-first-retry",
@@ -33,7 +35,7 @@ export default defineConfig({
         testIdAttribute: "id",
       },
       expect: {
-        timeout: 2_000,
+        timeout: timeoutConfig.shortTimeout,
       },
     },
   ],

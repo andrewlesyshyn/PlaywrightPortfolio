@@ -1,5 +1,6 @@
 /* eslint-disable playwright/expect-expect */
 import { test, expect, Locator } from "@playwright/test";
+import { timeoutConfig } from "../../playwright.config";
 
 let startBtn: Locator;
 let movingBtn: Locator;
@@ -21,7 +22,7 @@ test("Animation test (default)", async () => {
 });
 
 test("Waiting for class attribute to disappear", async () => {
-  await expect(movingBtn).not.toContainClass("spin", { timeout: 10_000 });
+  await expect(movingBtn).not.toContainClass("spin", { timeout: timeoutConfig.longTimeout });
   await movingBtn.click();
 });
 
