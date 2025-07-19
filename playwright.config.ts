@@ -9,7 +9,8 @@ import { defineConfig, devices } from "@playwright/test";
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export const timeoutConfig = {
-  shortTimeout: 2_000
+  shortTimeout: 2_000, 
+  longTimeout: 10_000
 };
 
 export default defineConfig({
