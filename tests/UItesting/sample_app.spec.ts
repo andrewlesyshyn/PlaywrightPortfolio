@@ -2,6 +2,8 @@ import { test, expect, Locator } from "@playwright/test";
 import dotenv from "dotenv";
 import path from "path";
 
+console.log(__dirname)
+
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 if (process.env.UI_USER_NAME === undefined)
   throw new Error("USER_NAME env variable is not defined");

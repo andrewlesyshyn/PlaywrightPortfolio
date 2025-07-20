@@ -2,17 +2,21 @@ import { test, expect, Locator } from "@playwright/test";
 
 let badBtn: Locator;
 
+const attributeName = "background-color";
+const colorBlue = "rgb(0, 123, 255)";
+const colorGreen = "rgb(33, 136, 56)";
+
 test.beforeEach(async ({ page }) => {
   await page.goto("/click");
 
   badBtn = page.getByTestId("badButton");
-  await expect(badBtn).toHaveCSS("background-color", "rgb(0, 123, 255)");
+  await expect(badBtn).toHaveCSS(attributeName, colorBlue);
 });
 
 test("Try to emulate", async () => {
   await badBtn.dispatchEvent("click");
 
-  await expect(badBtn).not.toHaveCSS("background-color", "rgb(33, 136, 56)");
+  await expect(badBtn).not.toHaveCSS(attributeName, colorGreen);
 });
 
 test("Click for real (thanks CDP)", async () => {
@@ -21,14 +25,14 @@ test("Click for real (thanks CDP)", async () => {
   //     return getComputedStyle(el).backgroundColor;
   // });
   // console.log(finalColor);
-  await expect(badBtn).toHaveCSS("background-color", "rgb(33, 136, 56)");
+  await expect(badBtn).toHaveCSS(attributeName, colorGreen);
 });
 
 test("Click semi-manually", async ({ page }) => {
   await badBtn.hover();
-  await expect(badBtn).toHaveCSS("background-color", "rgb(0, 105, 217)");
+  await expect(badBtn).toHaveCSS(attributeName, "rgb(0, 105, 217)");
   await page.click("#badButton", { position: { x: 10, y: 10 }, clickCount: 5 }); // don't ask
-  await expect(badBtn).toHaveCSS("background-color", "rgb(33, 136, 56)");
+  await expect(badBtn).toHaveCSS(attributeName, colorGreen);
 });
 
 test("Click manually", async ({ page }) => {
@@ -39,5 +43,5 @@ test("Click manually", async ({ page }) => {
   await page.mouse.up();
   // Or just use this code
   // await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
-  await expect(badBtn).toHaveCSS("background-color", "rgb(33, 136, 56)");
+  await expect(badBtn).toHaveCSS(attributeName, colorGreen);
 });
