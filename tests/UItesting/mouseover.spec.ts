@@ -20,6 +20,7 @@ test.fail("Try to click first button as usual, and fail", async () => {
 });
 
 test.fail("Try to click second button as usual, and fail", async ({ page }) => {
+  // eslint-disable-next-line playwright/no-element-handle
   const secondElement = await page.$(
     "body > section > div > div:nth-child(9) > a"
   ); // if we will use Locator object, in this case click() will work

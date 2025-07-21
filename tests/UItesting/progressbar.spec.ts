@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { timeoutConfig } from "../../playwright.config";
 
 let startBtn, stopBtn, progressbar, resultbar;
 
@@ -21,7 +22,7 @@ test("Progressbars can mess with expects, so 'poll'", async () => {
       },
       {
         intervals: [50],
-        timeout: 60_000,
+        timeout: timeoutConfig.maxTimeout,
       }
     )
     .toBe("75");
@@ -36,7 +37,7 @@ test("Also we can use 'toPass'", async () => {
     expect(valueNow).toBe("75");
   }).toPass({
     intervals: [50],
-    timeout: 60_000,
+    timeout: timeoutConfig.maxTimeout,
   });
   await stopBtn.click();
 });
