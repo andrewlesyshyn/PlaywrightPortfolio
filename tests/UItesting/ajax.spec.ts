@@ -2,7 +2,6 @@ import { test, expect, Locator, Request, Response } from "@playwright/test";
 
 let ajaxBtn: Locator;
 let ajaxDataDiv: Locator;
-const responseTextStr = "Data loaded with AJAX get request.";
 const requestURLsubstr = "/ajaxdata";
 
 test.beforeEach(async ({ page }) => {
@@ -49,6 +48,7 @@ test("Event listener", async ({ page }) => {
         ) {
           targetResponse = response;
           resolve(response);
+          console.log(await targetResponse.text(), targetResponse.url());
         }
       });
     }
@@ -56,7 +56,8 @@ test("Event listener", async ({ page }) => {
 
   page.on("request", (request) => {
     if (request.url().includes(requestURLsubstr)) {
-      targetRequest = request;
+      targetRequest = request
+      console.log(targetRequest.method(), targetRequest.url());
     }
   });
 
@@ -69,7 +70,7 @@ test("Event listener", async ({ page }) => {
 });
 
 test("AJAX route wait", async ({ page }) => {
-  let request = await page.route("**/ajaxdata", async (route) => {
+  await page.route("**/ajaxdata", async (route) => {
     const response = await route.fetch();
     let text = await response.text();
     console.log(text);
